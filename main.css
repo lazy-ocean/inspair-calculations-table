@@ -1,0 +1,22 @@
+body {
+  background: white; /* try type yellow */
+  color: #323232;
+
+  margin: 0;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Helvetica neue, roboto;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  display: block;
+  width: 700px;
+  margin: 10px;
+  padding: 4px;
+}
