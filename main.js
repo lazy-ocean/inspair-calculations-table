@@ -183,7 +183,7 @@ const makeTable = (tableArr) => {
     const { year, investments, maintenance, operational, salarySaved, performanceSaved, otherSaved, cashflowYear, cashflow } = item;
     //prettier-ignore
     let str = [year, investments, maintenance, operational, salarySaved, performanceSaved, otherSaved, cashflowYear, cashflow]
-      .map((key) => `<td>${key}</td>`)
+      .map((column) => `<td>${column.toFixed(0)}</td>`)
       .join("");
     table.push(`<tr>${str}</tr>`);
   }
