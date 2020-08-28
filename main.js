@@ -176,7 +176,7 @@ function calculate(values) {
 ////////////////////////////// ТАБЛИЦА
 const makeTable = (tableArr) => {
   let table = [
-    '<table border="1"><caption>Таблица окупаемости</caption><tr><th>Год</th><th>Стоимость вложений, руб.</th><th>Стоимость обслуживания, руб.</th><th>Стоимость операционных расходов,руб.</th><th>Экономия ФОТ, руб.</th><th>Экономия за счет увеличения производительности, руб.</th><th>Прочая экономия, руб.</th><th>Ежегодный кэш-флоу, руб.</th><th>Суммарный кэш-флоу, руб.</th></tr>',
+    '<table id="resultTable" border="1"><caption>Таблица окупаемости</caption><tr><th>Год</th><th>Стоимость вложений, руб.</th><th>Стоимость обслуживания, руб.</th><th>Стоимость операционных расходов,руб.</th><th>Экономия ФОТ, руб.</th><th>Экономия за счет увеличения производительности, руб.</th><th>Прочая экономия, руб.</th><th>Ежегодный кэш-флоу, руб.</th><th>Суммарный кэш-флоу, руб.</th></tr>',
   ];
   for (let item of tableArr) {
     //prettier-ignore
@@ -209,6 +209,10 @@ const onSubmit = function (event) {
   const tbl = createElementFromHTML(makeTable(result));
   const payback = paybackFunc(result);
   console.log(payback);
+
+  const resultTable = document.getElementById("resultTable");
+  if (resultTable) resultTable.remove();
+
   document.body.appendChild(tbl);
 };
 
