@@ -143,25 +143,25 @@ function calculate(values) {
   const maxYears = 20;
   for (let year = 1; year <= maxYears; year++) {
     // Расход энергии роботом
-    let energyCons = 5;
+    const ENEGRYCONS = 5;
     // Процент загрузки робота
-    let carryingCapacity = 0.9;
+    const CARRYINGCAPACITY = 0.9;
     // Инфляция
-    let inflation = 0.05;
+    const INFLATION = 0.05;
     // Стоимость электроэнергии
-    let electricityCosts = 4.5;
+    const ELECTRICITYCOSTS = 4.5;
     // Кол-во рабочих часов в смену
-    let workHours = 8;
+    const WORKHOURS = 8;
     // Кол-во недель в году
-    let workWeeks = 50;
-    let yearIndex = 1 + (year - 1) * inflation;
+    const WORKWEEKS = 50;
+    const yearIndex = 1 + (year - 1) * INFLATION;
     let row = {};
     row.year = year;
     /////// maintenance - Стоимость обслуживания, руб. [2]
     year % 5 === 0 ? (row.maintenance = 360000) : (row.maintenance = 120000);
     //prettier-ignore
     /////// operational - Стоимость операционных расходов,руб. [3]
-    row.operational = energyCons * Robots * carryingCapacity * yearIndex * Shifts * WorkingDays * electricityCosts * workHours * workWeeks;
+    row.operational = ENEGRYCONS * Robots * CARRYINGCAPACITY * yearIndex * Shifts * WorkingDays * ELECTRICITYCOSTS * WORKHOURS * WORKWEEKS;
     /////// salary saved - Экономия ФОТ, руб. [4]
     /////// investments - Стоимость вложений, руб. [1]
     if (year === 1) {
@@ -208,13 +208,13 @@ function calculate(values) {
 ////////////////////////////// ТАБЛИЦА
 const makeTable = (tableArr) => {
   let table = [
-    '<table id="resultTable" border="1"><caption>Таблица окупаемости</caption><tr><th>Год</th><th>Стоимость вложений, руб.</th><th>Стоимость обслуживания, руб.</th><th>Стоимость операционных расходов,руб.</th><th>Экономия ФОТ, руб.</th><th>Экономия за счет увеличения производительности, руб.</th><th>Прочая экономия, руб.</th><th>Ежегодный кэш-флоу, руб.</th><th>Суммарный кэш-флоу, руб.</th></tr>',
+    '<table id="resultTable" border="1"><caption>Таблица окупаемости</caption><tr><th>Год</th><th>Ежегодный кэш-флоу, руб.</th><th>Суммарный кэш-флоу, руб.</th><th>Стоимость вложений, руб.</th><th>Стоимость обслуживания, руб.</th><th>Стоимость операционных расходов,руб.</th><th>Экономия ФОТ, руб.</th><th>Экономия за счет увеличения производительности, руб.</th></tr>',
   ];
   for (let item of tableArr) {
     //prettier-ignore
-    const { year, investments, maintenance, operational, salarySaved, performanceSaved, otherSaved, cashflowYear, cashflow } = item;
+    const { year, investments, maintenance, operational, salarySaved, performanceSaved, cashflowYear, cashflow } = item;
     //prettier-ignore
-    let str = [year, investments, maintenance, operational, salarySaved, performanceSaved, otherSaved, cashflowYear, cashflow]
+    let str = [year, cashflowYear, cashflow, investments, maintenance, operational, salarySaved, performanceSaved]
       .map((column) => `<td>${column.toFixed(0)}</td>`)
       .join("");
     table.push(`<tr>${str}</tr>`);
@@ -239,11 +239,14 @@ const onSubmit = function (event) {
   }
   const result = calculate(values);
   const tbl = createElementFromHTML(makeTable(result));
-  const payback = paybackFunc(result);
+  const payback = createElementFromHTML(paybackFunc(result));
 
   const resultTable = document.getElementById("resultTable");
   if (resultTable) resultTable.remove();
 
+  const resultPayback = document.getElementById("paybackText");
+  if (resultPayback) resultPayback.remove();
+  document.body.appendChild(payback);
   document.body.appendChild(tbl);
 };
 
@@ -270,7 +273,7 @@ let plural = (years, months) => {
       : 4;
   text += months !== 0 ? `${months} ${casesM[indexM]}` : "";
 
-  return text;
+  return `<p id='paybackText'>${text}</p>`;
 };
 
 let paybackFunc = (table) => {
@@ -282,8 +285,8 @@ let paybackFunc = (table) => {
   // Предполагаем, что окупается за N лет + m месяцев, поэтому отнимаем от первого положительного года 1, чтобы посчитать месяцы
   paybackYears = payback.year - 1;
   // Кол-во месяцев до окупаемости:
-  let paybackRow = paybackYears > 0 ? table[paybackYears - 1] : table[0];
-  let {
+  const paybackRow = paybackYears > 0 ? table[paybackYears - 1] : table[0];
+  const {
     salarySaved,
     performanceSaved,
     otherSaved,
@@ -291,8 +294,8 @@ let paybackFunc = (table) => {
     operational,
     investments,
   } = paybackRow;
-  let savings = salarySaved + performanceSaved + otherSaved;
-  let spendings = maintenance + operational;
+  const savings = salarySaved + performanceSaved + otherSaved;
+  const spendings = maintenance + operational;
 
   let tempCashflow = paybackYears > 0 ? paybackRow.cashflow : -investments;
   while (tempCashflow < 0) {
