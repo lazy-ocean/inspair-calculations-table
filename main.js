@@ -8,7 +8,8 @@ const schema = {
     placeholder: 0,
     type: "number",
     required: true,
-    min: 1,
+    min: 1000000,
+    max: 50000000,
     // TEST
     value: 8400000,
   },
@@ -16,7 +17,8 @@ const schema = {
     label: "Количество высвобождаемых работников, чел",
     placeholder: 0,
     type: "number",
-    min: 0,
+    min: 1,
+    max: 20,
     required: true,
     // TEST
     value: 4,
@@ -25,7 +27,8 @@ const schema = {
     label: "Количество роботов в проекте",
     placeholder: 0,
     type: "number",
-    min: 0,
+    min: 1,
+    max: 5,
     required: true,
     // TEST
     value: 1,
@@ -65,7 +68,8 @@ const schema = {
     placeholder: 0,
     type: "number",
     required: true,
-    min: 0,
+    min: 420000,
+    max: 1500000,
     // TEST
     value: 561168,
   },
@@ -75,7 +79,8 @@ const schema = {
     placeholder: 0,
     type: "number",
     required: true,
-    min: 0,
+    min: 10000,
+    max: 100000,
     // TEST
     value: 10000,
   },
