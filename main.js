@@ -122,14 +122,26 @@ function calculate(values) {
   const tableArr = [];
   const maxYears = 20;
   for (let year = 1; year <= maxYears; year++) {
-    let yearIndex = 1 + (year - 1) * 0.02;
+    // Расход энергии роботом
+    let energyCons = 5;
+    // Процент загрузки робота
+    let carryingCapacity = 0.9;
+    // Инфляция
+    let inflation = 0.05;
+    // Стоимость электроэнергии
+    let electricityCosts = 4.5;
+    // Кол-во рабочих часов в смену
+    let workHours = 8;
+    // Кол-во недель в году
+    let workWeeks = 50;
+    let yearIndex = 1 + (year - 1) * inflation;
     let row = {};
     row.year = year;
     /////// maintenance - Стоимость обслуживания, руб. [2]
     year % 5 === 0 ? (row.maintenance = 360000) : (row.maintenance = 120000);
     //prettier-ignore
     /////// operational - Стоимость операционных расходов,руб. [3]
-    row.operational = 5 * Robots * 0.9 * yearIndex * Shifts * WorkingDays * 4.5 * 8 * 50;
+    row.operational = energyCons * Robots * carryingCapacity * yearIndex * Shifts * WorkingDays * electricityCosts * workHours * workWeeks;
     /////// salary saved - Экономия ФОТ, руб. [4]
     /////// investments - Стоимость вложений, руб. [1]
     if (year === 1) {
