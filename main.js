@@ -9,6 +9,8 @@ const schema = {
     type: "number",
     required: true,
     min: 1,
+    // TEST
+    value: 8400000,
   },
   FiredEmployees: {
     label: "Количество высвобождаемых работников, чел",
@@ -16,6 +18,8 @@ const schema = {
     type: "number",
     min: 0,
     required: true,
+    // TEST
+    value: 4,
   },
   Robots: {
     label: "Количество роботов в проекте",
@@ -23,6 +27,8 @@ const schema = {
     type: "number",
     min: 0,
     required: true,
+    // TEST
+    value: 1,
   },
   Performance: {
     label: "Ожидаемый прирост производительности, %",
@@ -31,6 +37,8 @@ const schema = {
     required: true,
     min: 0,
     max: 100,
+    // TEST
+    value: 0,
   },
   Shifts: {
     label: "Количество смен в сутки (по 8 часов), шт.",
@@ -39,6 +47,8 @@ const schema = {
     required: true,
     min: 0,
     max: 3,
+    // TEST
+    value: 2,
   },
   WorkingDays: {
     label: "Количество рабочих дней в неделю, шт.",
@@ -47,6 +57,8 @@ const schema = {
     required: true,
     min: 1,
     max: 7,
+    // TEST
+    value: 7,
   },
   CostsPerPerson: {
     label: "Затраты на человека на линии в год (с учетом налогов), руб/год",
@@ -54,6 +66,8 @@ const schema = {
     type: "number",
     required: true,
     min: 0,
+    // TEST
+    value: 561168,
   },
   Savings: {
     label:
@@ -62,6 +76,8 @@ const schema = {
     type: "number",
     required: true,
     min: 0,
+    // TEST
+    value: 10000,
   },
 };
 
@@ -102,7 +118,6 @@ const validate = (values) => {
 
 ////////////////////////////// РАСЧЕТЫ
 function calculate(values) {
-  console.log(values);
   const intValues = Object.keys(values).reduce((acc, item) => {
     acc[item] = parseFloat(values[item]);
     return acc;
@@ -220,7 +235,6 @@ const onSubmit = function (event) {
   const result = calculate(values);
   const tbl = createElementFromHTML(makeTable(result));
   const payback = paybackFunc(result);
-  console.log(payback);
 
   const resultTable = document.getElementById("resultTable");
   if (resultTable) resultTable.remove();
@@ -231,28 +245,59 @@ const onSubmit = function (event) {
 form.addEventListener("submit", onSubmit, true);
 
 ////////// ОКУПАЕМОСТЬ
+let plural = (years, months) => {
+  let text = "Срок окупаемости: ";
+  casesY = ["год", "года", "года", "года", "лет"];
+  let indexY =
+    years % 100 > 4 && years % 100 <= 20
+      ? 4
+      : years % 10 < 5
+      ? (years % 10) - 1
+      : 4;
+  text += years !== 0 ? `${years} ${casesY[indexY]} ` : "";
+
+  casesM = ["месяц", "месяца", "месяца", "месяца", "месяцев"];
+  let indexM =
+    months % 100 > 4 && months % 100 <= 20
+      ? 4
+      : months % 10 < 5
+      ? (months % 10) - 1
+      : 4;
+  text += months !== 0 ? `${months} ${casesM[indexM]}` : "";
+
+  return text;
+};
+
 let paybackFunc = (table) => {
-  let [firstYearRow, ...others] = table;
-  /// используемые переменные:
-  let months = 12;
-  let years;
-  let savings =
-    firstYearRow.salarySaved +
-    firstYearRow.performanceSaved +
-    firstYearRow.otherSaved;
-  let spendings = firstYearRow.maintenance + firstYearRow.operational;
-  let investments = firstYearRow.investments;
+  let paybackYears;
+  let paybackMonths = 0;
+  // Кол-во лет до окупаемости
+  const payback = table.find((row) => row.cashflow > 0) || null;
+  if (payback === null) return "Проект не окупается";
+  // Предполагаем, что окупается за N лет + m месяцев, поэтому отнимаем от первого положительного года 1, чтобы посчитать месяцы
+  paybackYears = payback.year - 1;
+  // Кол-во месяцев до окупаемости:
+  let paybackRow = paybackYears > 0 ? table[paybackYears - 1] : table[0];
+  let {
+    salarySaved,
+    performanceSaved,
+    otherSaved,
+    maintenance,
+    operational,
+    investments,
+  } = paybackRow;
+  let savings = salarySaved + performanceSaved + otherSaved;
+  let spendings = maintenance + operational;
 
-  let paybackMonths = savings / months - spendings / months - investments;
-  console.log(`payback is ${paybackMonths}`);
-  let moneyLeft = savings - spendings - investments;
-
-  if (paybackMonths < 1) {
-    /// окупаемость меньше месяца
-  } else if (moneyLeft > 0) {
-    // другая окупаемость меньше года
-  } else {
-    months = 1;
-    years = 2;
+  let tempCashflow = paybackYears > 0 ? paybackRow.cashflow : -investments;
+  while (tempCashflow < 0) {
+    tempCashflow += (savings - spendings) / 12;
+    paybackMonths += 1;
   }
+  if (paybackMonths === 12) {
+    paybackMonths = 0;
+    paybackYears += 1;
+  }
+  console.log(plural(paybackYears, paybackMonths));
+  return plural(paybackYears, paybackMonths);
 };
