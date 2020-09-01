@@ -1,5 +1,5 @@
 body {
-  background: white; /* try type yellow */
+  background: white;
   color: #323232;
 
   margin: 0;
@@ -9,13 +9,22 @@ body {
   justify-content: center;
 
   font-family: Helvetica neue, roboto;
-  display: flex;
   flex-direction: column;
 }
 
+.form-container {
+  width: 70%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.form {
+  width: 70%;
+}
 .form-field {
   display: block;
-  width: 700px;
+  width: 100%;
   margin: 10px;
   padding: 4px;
 }
@@ -27,4 +36,30 @@ body {
 
 .information {
   display: none;
+}
+
+.form--item {
+  margin-top: 60px;
+  position: relative;
+}
+
+/* BUBBLE FOR THE FORM INPUTS */
+.bubble {
+  background: green;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: green;
+  top: -1px;
+  left: 50%;
 }

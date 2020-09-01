@@ -6,17 +6,18 @@ const schema = {
   ProjectPrice: {
     label: "Стоимость проекта, руб",
     placeholder: 0,
-    type: "number",
+    type: "range",
     required: true,
     min: 1000000,
     max: 50000000,
     // TEST
     value: 8400000,
+    step: 1000,
   },
   FiredEmployees: {
     label: "Количество высвобождаемых работников, чел",
     placeholder: 0,
-    type: "number",
+    type: "range",
     min: 1,
     max: 20,
     required: true,
@@ -26,7 +27,7 @@ const schema = {
   Robots: {
     label: "Количество роботов в проекте",
     placeholder: 0,
-    type: "number",
+    type: "range",
     min: 1,
     max: 5,
     required: true,
@@ -36,7 +37,7 @@ const schema = {
   Performance: {
     label: "Ожидаемый прирост производительности, %",
     placeholder: 0,
-    type: "number",
+    type: "range",
     required: true,
     min: 0,
     max: 100,
@@ -46,7 +47,7 @@ const schema = {
   Shifts: {
     label: "Количество смен в сутки (по 8 часов), шт.",
     placeholder: 0,
-    type: "number",
+    type: "range",
     required: true,
     min: 0,
     max: 3,
@@ -56,7 +57,7 @@ const schema = {
   WorkingDays: {
     label: "Количество рабочих дней в неделю, шт.",
     placeholder: 0,
-    type: "number",
+    type: "range",
     required: true,
     min: 1,
     max: 7,
@@ -66,18 +67,19 @@ const schema = {
   CostsPerPerson: {
     label: "Затраты на человека на линии в год (с учетом налогов), руб/год",
     placeholder: 0,
-    type: "number",
+    type: "range",
     required: true,
     min: 420000,
     max: 1500000,
     // TEST
     value: 561168,
+    step: 100,
   },
   Savings: {
     label:
       "Дополнительная экономия (защитные костюмы, аттестации и пр.), руб/год",
     placeholder: 0,
-    type: "number",
+    type: "range",
     required: true,
     min: 10000,
     max: 100000,
@@ -100,14 +102,29 @@ const nodes = Object.keys(schema).map((item) => {
       return acc + `${key}="${value[key]}"`;
     }, "") + `class="${CLASSNAMES.inputs}" name="${item}"`;
   let name = value["label"];
-  let element = createElementFromHTML(`<label for="${item}">${name}</label>`);
-  let label = createElementFromHTML(`<input ${attrs} /><br />`);
-  return { element, label };
+  let label = createElementFromHTML(
+    `<label class="form--label" for="${item}">${name}</label>`
+  );
+  let element = createElementFromHTML(`<input ${attrs} /><br />`);
+  let output = createElementFromHTML(
+    `<output class="bubble bubble--${item}"></output>`
+  );
+  return { item, element, label, output };
 });
 
 nodes.forEach((node) => {
-  form.append(node.element);
-  form.append(node.label);
+  form.append(
+    createElementFromHTML(
+      `<div class= 'form--item form--item-${node.item}'></div>`
+    )
+  );
+  const item = document.querySelector(`.form--item-${node.item}`);
+  item.append(node.label);
+  item.append(node.element);
+  item.append(node.output);
+  //form.append(node.label);
+  //form.append(node.element);
+  //form.append(node.output);
 });
 
 ////////////////////////////// ВАЛИДАЦИЯ
@@ -309,3 +326,25 @@ let paybackFunc = (table) => {
   console.log(plural(paybackYears, paybackMonths));
   return plural(paybackYears, paybackMonths);
 };
+
+////// BUBBLES FOR THE FORM
+const allScales = document.querySelectorAll(".form--item");
+allScales.forEach((item) => {
+  const scale = item.querySelector(".form-field");
+  const bubble = item.querySelector(".bubble");
+
+  scale.addEventListener("input", () => {
+    setBubble(scale, bubble);
+  });
+  setBubble(scale, bubble);
+});
+
+function setBubble(scale, bubble) {
+  const value = scale.value;
+  const min = scale.min;
+  const max = scale.max;
+  const newValue = Number(((value - min) * 100) / (max - min));
+  console.log(newValue);
+  bubble.innerHTML = value;
+  bubble.style.left = `calc(${newValue}% + (${20 - newValue * 0.15}px))`;
+}
