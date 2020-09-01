@@ -12,6 +12,7 @@ body {
   flex-direction: column;
 }
 
+/* ФОРМА */
 .form-container {
   width: 70%;
   display: flex;
@@ -21,6 +22,12 @@ body {
 
 .form {
   width: 80%;
+}
+
+.form--item {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  position: relative;
 }
 
 .form-field {
@@ -47,24 +54,42 @@ body {
   cursor: pointer;
 }
 
-#paybackText {
-  align-self: flex-start;
-  font-size: 25px;
+/* BUBBLE FOR THE FORM INPUTS */
+.bubble {
+  background: #ffb800;
+  color: black;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.information {
-  display: none;
-}
-
-.form--item {
-  margin-top: 50px;
-  margin-bottom: 50px;
-  position: relative;
+.bubble::before {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 15px;
+  background: #ffb800;
+  left: 50%;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  transform: translate(-50%, -112%);
 }
 
 .form--minmax {
   display: flex;
   justify-content: space-between;
+}
+
+/* ОКУПАЕМОСТЬ */
+#paybackText {
+  align-self: flex-start;
+  font-size: 25px;
+}
+
+/* ИНФО ПРО РОБОТОВ */
+.information {
+  display: none;
 }
 
 /* BUTTON */
@@ -93,26 +118,4 @@ body {
 
 .submit-btn:active {
   transform: translateY(3px);
-}
-
-/* BUBBLE FOR THE FORM INPUTS */
-.bubble {
-  background: #ffb800;
-  color: black;
-  padding: 4px 12px;
-  position: absolute;
-  border-radius: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.bubble::before {
-  content: "";
-  position: absolute;
-  width: 30px;
-  height: 15px;
-  background: #ffb800;
-  left: 50%;
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  transform: translate(-50%, -112%);
 }
