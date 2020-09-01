@@ -1,6 +1,6 @@
 body {
-  background: white;
-  color: #323232;
+  background: #555559;
+  color: #ffffff;
 
   margin: 0;
 
@@ -8,7 +8,7 @@ body {
   align-items: center;
   justify-content: center;
 
-  font-family: Helvetica neue, roboto;
+  font-family: Montserrat, Arial, sans-serif;
   flex-direction: column;
 }
 
@@ -20,13 +20,31 @@ body {
 }
 
 .form {
-  width: 70%;
+  width: 80%;
 }
+
 .form-field {
   display: block;
   width: 100%;
-  margin: 10px;
-  padding: 4px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  appearance: none;
+  background-color: #ffb800;
+  height: 3px;
+}
+
+.form-field:focus {
+  outline: none;
+}
+
+.form-field::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #383838;
+  border: #ffb800 2px solid;
+  cursor: pointer;
 }
 
 #paybackText {
@@ -39,14 +57,48 @@ body {
 }
 
 .form--item {
-  margin-top: 60px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   position: relative;
+}
+
+.form--minmax {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* BUTTON */
+.submit-btn {
+  display: block;
+  width: 50%;
+  padding: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 2px solid #ffb800;
+  background-color: #ffb800;
+  font-family: Montserrat, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submit-btn:focus {
+  outline: none;
+}
+
+.submit-btn:hover {
+  background-color: #f3c424;
+}
+
+.submit-btn:active {
+  transform: translateY(3px);
 }
 
 /* BUBBLE FOR THE FORM INPUTS */
 .bubble {
-  background: green;
-  color: white;
+  background: #ffb800;
+  color: black;
   padding: 4px 12px;
   position: absolute;
   border-radius: 4px;
@@ -54,12 +106,13 @@ body {
   transform: translateX(-50%);
 }
 
-.bubble::after {
+.bubble::before {
   content: "";
   position: absolute;
-  width: 2px;
-  height: 2px;
-  background: green;
-  top: -1px;
+  width: 30px;
+  height: 15px;
+  background: #ffb800;
   left: 50%;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  transform: translate(-50%, -112%);
 }

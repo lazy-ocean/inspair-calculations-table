@@ -109,7 +109,10 @@ const nodes = Object.keys(schema).map((item) => {
   let output = createElementFromHTML(
     `<output class="bubble bubble--${item}"></output>`
   );
-  return { item, element, label, output };
+  let scale = createElementFromHTML(
+    `<div class="form--minmax"><span>${value.min}</span><span>${value.max}</span></div>`
+  );
+  return { item, element, label, output, scale };
 });
 
 nodes.forEach((node) => {
@@ -122,6 +125,7 @@ nodes.forEach((node) => {
   item.append(node.label);
   item.append(node.element);
   item.append(node.output);
+  item.append(node.scale);
   //form.append(node.label);
   //form.append(node.element);
   //form.append(node.output);
@@ -346,5 +350,5 @@ function setBubble(scale, bubble) {
   const newValue = Number(((value - min) * 100) / (max - min));
   console.log(newValue);
   bubble.innerHTML = value;
-  bubble.style.left = `calc(${newValue}% + (${20 - newValue * 0.15}px))`;
+  bubble.style.left = `calc(${newValue}% + (${10 - newValue * 0.15}px))`;
 }
