@@ -73,7 +73,7 @@ const schema = {
     max: 1500000,
     // TEST
     value: 561168,
-    step: 100,
+    step: 1000,
   },
   Savings: {
     label:
@@ -85,6 +85,7 @@ const schema = {
     max: 100000,
     // TEST
     value: 10000,
+    step: 1000,
   },
 };
 
@@ -123,9 +124,16 @@ nodes.forEach((node) => {
   );
   const item = document.querySelector(`.form--item-${node.item}`);
   item.append(node.label);
-  item.append(node.element);
-  item.append(node.output);
-  item.append(node.scale);
+
+  item.append(
+    createElementFromHTML(
+      `<div class= 'form--scale form--scale-${node.item}'></div>`
+    )
+  );
+  const formScale = document.querySelector(`.form--scale-${node.item}`);
+  formScale.append(node.element);
+  formScale.append(node.output);
+  formScale.append(node.scale);
   //form.append(node.label);
   //form.append(node.element);
   //form.append(node.output);

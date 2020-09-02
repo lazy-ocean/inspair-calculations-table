@@ -14,7 +14,7 @@ body {
 
 /* ФОРМА */
 .form-container {
-  width: 70%;
+  width: 90%;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -25,9 +25,20 @@ body {
 }
 
 .form--item {
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form--label {
+  margin-right: 30px;
+  padding-top: 5px;
+}
+
+.form--scale {
   position: relative;
+  width: 670px;
 }
 
 .form-field {
@@ -54,6 +65,11 @@ body {
   cursor: pointer;
 }
 
+.form--minmax {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* BUBBLE FOR THE FORM INPUTS */
 .bubble {
   background: #ffb800;
@@ -74,11 +90,6 @@ body {
   left: 50%;
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   transform: translate(-50%, -112%);
-}
-
-.form--minmax {
-  display: flex;
-  justify-content: space-between;
 }
 
 /* ОКУПАЕМОСТЬ */
@@ -118,4 +129,14 @@ body {
 
 .submit-btn:active {
   transform: translateY(3px);
+}
+
+@media only screen and (max-width: 900px) {
+  .form--item {
+    display: block;
+  }
+
+  .form--scale {
+    width: 100%;
+  }
 }
