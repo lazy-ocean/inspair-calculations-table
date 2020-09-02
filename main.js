@@ -111,7 +111,9 @@ const nodes = Object.keys(schema).map((item) => {
     `<output class="bubble bubble--${item}"></output>`
   );
   let scale = createElementFromHTML(
-    `<div class="form--minmax"><span>${value.min}</span><span>${value.max}</span></div>`
+    `<div class="form--minmax"><span>${value.min.toLocaleString(
+      "ru"
+    )}</span><span>${value.max.toLocaleString("ru")}</span></div>`
   );
   return { item, element, label, output, scale };
 });
@@ -244,7 +246,7 @@ const makeTable = (tableArr) => {
     const { year, investments, maintenance, operational, salarySaved, performanceSaved, cashflowYear, cashflow } = item;
     //prettier-ignore
     let str = [year, cashflowYear, cashflow, investments, maintenance, operational, salarySaved, performanceSaved]
-      .map((column) => `<td>${column.toFixed(0)}</td>`)
+      .map((column) => `<td>${column.toLocaleString("ru")}</td>`)
       .join("");
     table.push(`<tr>${str}</tr>`);
   }
@@ -352,11 +354,10 @@ allScales.forEach((item) => {
 });
 
 function setBubble(scale, bubble) {
-  const value = scale.value;
+  const value = ~~scale.value;
   const min = scale.min;
   const max = scale.max;
   const newValue = Number(((value - min) * 100) / (max - min));
-  console.log(newValue);
-  bubble.innerHTML = value;
+  bubble.innerHTML = value.toLocaleString("ru");
   bubble.style.left = `calc(${newValue}% + (${10 - newValue * 0.15}px))`;
 }
