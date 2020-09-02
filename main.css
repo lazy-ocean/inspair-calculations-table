@@ -32,13 +32,14 @@ body {
 }
 
 .form--label {
-  margin-right: 30px;
   padding-top: 5px;
+  max-width: 35%;
+  display: block;
 }
 
 .form--scale {
   position: relative;
-  width: 670px;
+  width: 60%;
 }
 
 .form-field {
@@ -138,5 +139,9 @@ body {
 
   .form--scale {
     width: 100%;
+  }
+
+  .form--label {
+    max-width: 100%;
   }
 }
