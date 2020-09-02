@@ -132,6 +132,55 @@ body {
   transform: translateY(3px);
 }
 
+/* TABLE SECTION */
+.result {
+  /*background-color: #ffb800;
+  color: #000000;*/
+  background-color: #555559;
+  color: #ffffff;
+}
+
+#resultTable {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3px;
+  font-size: 15px;
+  border-collapse: collapse;
+  text-align: right;
+  overflow: auto;
+  position: relative;
+}
+
+th,
+td {
+  padding: 15px;
+  border-bottom: 1px solid #a4a4a4;
+  border-left: none;
+  /*min-width: 135px;*/
+  max-width: 170px;
+}
+
+th {
+  text-align: right;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #747474;
+}
+
+tr:hover {
+  background-color: #747474;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+  min-width: 80px;
+  position: sticky;
+  left: 0;
+  background-color: #636363;
+}
+
 @media only screen and (max-width: 900px) {
   .form--item {
     display: block;

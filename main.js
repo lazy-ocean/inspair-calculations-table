@@ -239,7 +239,7 @@ function calculate(values) {
 ////////////////////////////// ТАБЛИЦА
 const makeTable = (tableArr) => {
   let table = [
-    '<table id="resultTable" border="1"><caption>Таблица окупаемости</caption><tr><th>Год</th><th>Ежегодный кэш-флоу, руб.</th><th>Суммарный кэш-флоу, руб.</th><th>Стоимость вложений, руб.</th><th>Стоимость обслуживания, руб.</th><th>Стоимость операционных расходов,руб.</th><th>Экономия ФОТ, руб.</th><th>Экономия за счет увеличения производительности, руб.</th></tr>',
+    '<table id="resultTable"><caption>Таблица окупаемости</caption><tr><th>Год</th><th>Ежегодный кэш-флоу, руб.</th><th>Суммарный кэш-флоу, руб.</th><th>Вложения, руб.</th><th>Обслуживание, руб.</th><th>Операционные расходы, руб.</th><th>Экономия ФОТ, руб.</th><th>Экономия от увеличения производительности, руб.</th></tr>',
   ];
   for (let item of tableArr) {
     //prettier-ignore
@@ -256,6 +256,7 @@ const makeTable = (tableArr) => {
 };
 
 ////////////////////////////// SUBMIT
+
 const onSubmit = function (event) {
   event.preventDefault();
   let values = Array.from(form.elements).reduce((acc, elem) => {
@@ -277,8 +278,12 @@ const onSubmit = function (event) {
 
   const resultPayback = document.getElementById("paybackText");
   if (resultPayback) resultPayback.remove();
-  document.body.appendChild(payback);
-  document.body.appendChild(tbl);
+  //document.body.appendChild(payback);
+  //document.body.appendChild(tbl);
+  const resultDiv = document.querySelector(".result");
+  resultDiv.append(payback);
+  resultDiv.append(tbl);
+  resultDiv.scrollIntoView();
 };
 
 form.addEventListener("submit", onSubmit, true);
@@ -337,7 +342,6 @@ let paybackFunc = (table) => {
     paybackMonths = 0;
     paybackYears += 1;
   }
-  console.log(plural(paybackYears, paybackMonths));
   return plural(paybackYears, paybackMonths);
 };
 
