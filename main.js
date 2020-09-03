@@ -305,7 +305,7 @@ let plural = (years, months) => {
       : years % 10 < 5
       ? (years % 10) - 1
       : 4;
-  text += years !== 0 ? `${years} ${casesY[indexY]} ` : "";
+  text += years !== 0 ? `${years}&nbsp;${casesY[indexY]} ` : "";
 
   casesM = ["месяц", "месяца", "месяца", "месяца", "месяцев"];
   let indexM =
@@ -314,7 +314,7 @@ let plural = (years, months) => {
       : months % 10 < 5
       ? (months % 10) - 1
       : 4;
-  text += months !== 0 ? `${months} ${casesM[indexM]}` : "";
+  text += months !== 0 ? `${months}&nbsp;${casesM[indexM]}` : "";
 
   return `<p id='paybackText'>${text}</p>`;
 };
