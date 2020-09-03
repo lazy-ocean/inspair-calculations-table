@@ -11,11 +11,14 @@
       <button type="submit" form="form" class="submit-btn">Отправить</button>
     </div>
     <div class="information">
-      <input type="checkbox" id="information--check" />
+      <!--<input type="checkbox" id="information--check" />
       <label for="information--check" class="information--label"
         >Параметры, используемые в вычислении:</label
-      >
-      <ul class="information--text">
+      >-->
+      <a class="information--btn" onclick="openInfo()" href="#info--text">
+        Параметры, используемые в вычислении:
+      </a>
+      <ul id="info--text" class="information--text" style="display: none">
         <li>1 робот потребляет 5 кВт в час</li>
         <li>Ежегодное обслуживание робота — 120 000 ₽</li>
         <li>Стоимость обслуживания 1 раз в 5 лет — 360 000 ₽</li>

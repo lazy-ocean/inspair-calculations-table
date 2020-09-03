@@ -287,10 +287,10 @@ const onSubmit = function (event) {
   document.body.append(payback);
   document.body.append(tbl);
   const resultDiv = document.querySelector(".result");
-  resultDiv.scrollIntoView();
   const info = document.querySelector(".information");
   document.body.append(info);
   info.style.display = "block";
+  info.scrollIntoView();
 };
 
 form.addEventListener("submit", onSubmit, true);
@@ -371,4 +371,11 @@ function setBubble(scale, bubble) {
   const newValue = Number(((value - min) * 100) / (max - min));
   bubble.innerHTML = value.toLocaleString("ru");
   bubble.style.left = `calc(${newValue}% + (${10 - newValue * 0.15}px))`;
+}
+
+/// ИНФОРМАЦИЯ
+const infobtn = document.querySelector(".information--btn");
+const infotxt = document.querySelector(".information--text");
+function openInfo() {
+  infotxt.style.display = infotxt.style.display === "none" ? "block" : "none";
 }

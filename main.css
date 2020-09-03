@@ -106,7 +106,40 @@ body {
   height: 40px;
 }
 
-#information--check,
+.information--text {
+  display: none;
+}
+
+.information--btn,
+.information--btn:active,
+.information--btn:visited {
+  padding: 5px;
+  border-bottom: 4px dashed #ffb800;
+  font-weight: 700;
+  line-height: 200%;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+}
+
+.information--text {
+  padding: 10px;
+  list-style: none;
+  position: relative;
+}
+
+.information--text > li {
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.information--text > li:before {
+  content: "—";
+  position: absolute;
+  left: 0;
+}
+
+/*#information--check,
 .information--text {
   display: none;
 }
@@ -137,7 +170,7 @@ body {
   content: "—";
   position: absolute;
   left: 0;
-}
+}*/
 
 /* BUTTON */
 .submit-btn {
@@ -175,7 +208,7 @@ body {
   color: #ffffff;
   display: block;
   width: 90%;
-  height: 70vh;
+  height: 60vh;
   overflow: auto;
   margin-bottom: 30px;
   box-shadow: 5px 10px 30px 0px rgba(46, 46, 46, 0.35);
