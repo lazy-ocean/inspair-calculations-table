@@ -239,7 +239,7 @@ function calculate(values) {
 ////////////////////////////// ТАБЛИЦА
 const makeTable = (tableArr) => {
   let table = [
-    '<table id="resultTable"><caption>Таблица окупаемости</caption><tr><th>Год</th><th>Ежегодный кэш-флоу, руб.</th><th>Суммарный кэш-флоу, руб.</th><th>Вложения, руб.</th><th>Обслуживание, руб.</th><th>Операционные расходы, руб.</th><th>Экономия ФОТ, руб.</th><th>Экономия от увеличения производительности, руб.</th></tr>',
+    '<table id="resultTable"><tr><th>Год</th><th>Ежегодный кэш-флоу, руб.</th><th>Суммарный кэш-флоу, руб.</th><th>Вложения, руб.</th><th>Обслуживание, руб.</th><th>Операционные расходы, руб.</th><th>Экономия ФОТ, руб.</th><th>Экономия от увеличения производительности, руб.</th></tr>',
   ];
   for (let item of tableArr) {
     //prettier-ignore
@@ -270,7 +270,9 @@ const onSubmit = function (event) {
     return;
   }
   const result = calculate(values);
-  const tbl = createElementFromHTML(makeTable(result));
+  const tbl = createElementFromHTML(
+    `<section class="result">${makeTable(result)}</section>`
+  );
   const payback = createElementFromHTML(paybackFunc(result));
 
   const resultTable = document.getElementById("resultTable");
@@ -280,9 +282,9 @@ const onSubmit = function (event) {
   if (resultPayback) resultPayback.remove();
   //document.body.appendChild(payback);
   //document.body.appendChild(tbl);
+  document.body.append(payback);
+  document.body.append(tbl);
   const resultDiv = document.querySelector(".result");
-  resultDiv.append(payback);
-  resultDiv.append(tbl);
   resultDiv.scrollIntoView();
 };
 
