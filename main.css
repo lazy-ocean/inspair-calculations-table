@@ -2,7 +2,7 @@ body {
   background: #555559;
   color: #ffffff;
 
-  margin: 0;
+  margin: 0 80px 0 80px;
 
   display: flex;
   align-items: center;
@@ -102,6 +102,40 @@ body {
 /* ИНФО ПРО РОБОТОВ */
 .information {
   display: none;
+  width: 90%;
+  height: 40px;
+}
+
+#information--check,
+.information--text {
+  display: none;
+}
+
+.information--label {
+  padding: 5px;
+  border-bottom: 5px dashed #ffb800;
+  font-weight: 700;
+}
+
+.information :checked ~ .information--text {
+  display: block;
+}
+
+.information--text {
+  padding: 10px;
+  list-style: none;
+  position: relative;
+}
+
+.information--text > li {
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.information--text > li:before {
+  content: "—";
+  position: absolute;
+  left: 0;
 }
 
 /* BUTTON */
@@ -143,6 +177,7 @@ body {
   height: 70vh;
   overflow: auto;
   margin-bottom: 30px;
+  box-shadow: 5px 10px 30px 0px rgba(46, 46, 46, 0.35);
 }
 
 #resultTable {

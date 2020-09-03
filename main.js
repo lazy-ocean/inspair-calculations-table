@@ -286,6 +286,9 @@ const onSubmit = function (event) {
   document.body.append(tbl);
   const resultDiv = document.querySelector(".result");
   resultDiv.scrollIntoView();
+  const info = document.querySelector(".information");
+  document.body.append(info);
+  info.style.display = "block";
 };
 
 form.addEventListener("submit", onSubmit, true);
