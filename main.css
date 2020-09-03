@@ -113,8 +113,9 @@ body {
 
 .information--label {
   padding: 5px;
-  border-bottom: 5px dashed #ffb800;
+  border-bottom: 4px dashed #ffb800;
   font-weight: 700;
+  line-height: 200%;
 }
 
 .information :checked ~ .information--text {
@@ -254,5 +255,23 @@ th + td {
 
   .form--label {
     max-width: 100%;
+  }
+
+  body {
+    margin: 0 40px;
+  }
+
+  .result {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .form-container {
+    width: 100%;
+  }
+
+  body {
+    margin: 0 25px;
   }
 }

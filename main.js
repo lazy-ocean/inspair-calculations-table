@@ -273,7 +273,9 @@ const onSubmit = function (event) {
   const tbl = createElementFromHTML(
     `<section class="result">${makeTable(result)}</section>`
   );
-  const payback = createElementFromHTML(paybackFunc(result));
+  const payback = createElementFromHTML(
+    `<section class="payback">${paybackFunc(result)}</section>`
+  );
 
   const resultTable = document.getElementById("resultTable");
   if (resultTable) resultTable.remove();
