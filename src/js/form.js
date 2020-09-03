@@ -1,6 +1,8 @@
 import { CLASSNAMES } from "./constants";
-import { schema, validate, calculate, calculatePayback } from "./calculator";
+import calculator from "./calculator";
 import makeTable from "./table";
+
+const { schema, validate, calculate, calculatePayback } = calculator;
 
 export default () => {
   function createElementFromHTML(htmlString) {
