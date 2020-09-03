@@ -6,26 +6,28 @@
     <link rel="stylesheet" href="./main.css" />
   </head>
   <body>
-    <div class="form-container">
-      <form class="form" id="form" method="POST"></form>
-      <button type="submit" form="form" class="submit-btn">Отправить</button>
-    </div>
-    <div class="information">
-      <!--<input type="checkbox" id="information--check" />
+    <div class="container">
+      <div class="form-container">
+        <form class="form" id="form" method="POST"></form>
+        <button type="submit" form="form" class="submit-btn">Отправить</button>
+      </div>
+      <div class="information">
+        <!--<input type="checkbox" id="information--check" />
       <label for="information--check" class="information--label"
         >Параметры, используемые в вычислении:</label
       >-->
-      <a class="information--btn" onclick="openInfo()" href="#info--text">
-        Параметры, используемые в вычислении:
-      </a>
-      <ul id="info--text" class="information--text" style="display: none">
-        <li>1 робот потребляет 5 кВт в час</li>
-        <li>Ежегодное обслуживание робота — 120 000 ₽</li>
-        <li>Стоимость обслуживания 1 раз в 5 лет — 360 000 ₽</li>
-        <li>Инфляция в год — 5%</li>
-        <li>Процент загрузки робота — 90%</li>
-        <li>Стоимость электроэнергии — 4,5 ₽ кВт в час</li>
-      </ul>
+        <a class="information--btn" onclick="openInfo()" href="#info--text">
+          Параметры, используемые в&nbsp;вычислении:
+        </a>
+        <ul id="info--text" class="information--text">
+          <li>1 робот потребляет 5 кВт в час</li>
+          <li>Ежегодное обслуживание робота — 120 000 ₽</li>
+          <li>Стоимость обслуживания 1 раз в 5 лет — 360 000 ₽</li>
+          <li>Инфляция в год — 5%</li>
+          <li>Процент загрузки робота — 90%</li>
+          <li>Стоимость электроэнергии — 4,5 ₽ кВт в час</li>
+        </ul>
+      </div>
     </div>
 
     <script src="./main.js"></script>

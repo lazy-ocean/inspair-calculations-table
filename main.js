@@ -4,7 +4,7 @@ const CLASSNAMES = {
 
 const schema = {
   ProjectPrice: {
-    label: "Стоимость проекта, руб",
+    label: "Стоимость проекта, ₽",
     placeholder: 0,
     type: "range",
     required: true,
@@ -65,7 +65,7 @@ const schema = {
     value: 7,
   },
   CostsPerPerson: {
-    label: "Затраты на человека на линии в год (с учетом налогов), руб/год",
+    label: "Затраты на человека на линии в год (с учетом налогов), ₽/год",
     placeholder: 0,
     type: "range",
     required: true,
@@ -77,7 +77,7 @@ const schema = {
   },
   Savings: {
     label:
-      "Дополнительная экономия (защитные костюмы, аттестации и пр.), руб/год",
+      "Дополнительная экономия (защитные костюмы, аттестации и пр.), ₽/год",
     placeholder: 0,
     type: "range",
     required: true,
@@ -188,13 +188,13 @@ function calculate(values) {
     const yearIndex = 1 + (year - 1) * INFLATION;
     let row = {};
     row.year = year;
-    /////// maintenance - Стоимость обслуживания, руб. [2]
+    /////// maintenance - Стоимость обслуживания, ₽ [2]
     year % 5 === 0 ? (row.maintenance = 360000) : (row.maintenance = 120000);
     //prettier-ignore
-    /////// operational - Стоимость операционных расходов,руб. [3]
+    /////// operational - Стоимость операционных расходов,₽ [3]
     row.operational = ENEGRYCONS * Robots * CARRYINGCAPACITY * yearIndex * Shifts * WorkingDays * ELECTRICITYCOSTS * WORKHOURS * WORKWEEKS;
-    /////// salary saved - Экономия ФОТ, руб. [4]
-    /////// investments - Стоимость вложений, руб. [1]
+    /////// salary saved - Экономия ФОТ, ₽ [4]
+    /////// investments - Стоимость вложений, ₽ [1]
     if (year === 1) {
       row.salarySaved =
         FiredEmployees * CostsPerPerson * yearIndex -
@@ -206,13 +206,13 @@ function calculate(values) {
         FiredEmployees * CostsPerPerson * yearIndex -
         CostsPerPerson * (FiredEmployees / 5) * yearIndex;
     }
-    /////// performanceSaved - Экономия за счет увеличения производительности, руб. [5]
+    /////// performanceSaved - Экономия за счет увеличения производительности, ₽ [5]
     row.performanceSaved = row.salarySaved * (Performance / 100);
-    /////// otherSaved - Прочая экономия, руб. [6]
+    /////// otherSaved - Прочая экономия, ₽ [6]
     row.otherSaved = Savings;
 
-    /////// cashflowYear - Ежегодный кэш-флоу, руб. [7]
-    /////// cashflow - Суммарный кэш-флоу, руб. [8]
+    /////// cashflowYear - Ежегодный кэш-флоу, ₽ [7]
+    /////// cashflow - Суммарный кэш-флоу, ₽ [8]
     if (year === 1) {
       row.cashflowYear =
         row.salarySaved +
@@ -239,7 +239,7 @@ function calculate(values) {
 ////////////////////////////// ТАБЛИЦА
 const makeTable = (tableArr) => {
   let table = [
-    '<table id="resultTable"><tr><th>Год</th><th>Ежегодный кэш-флоу, руб.</th><th>Суммарный кэш-флоу, руб.</th><th>Вложения, руб.</th><th>Обслуживание, руб.</th><th>Операционные расходы, руб.</th><th>Экономия ФОТ, руб.</th><th>Экономия от увеличения производительности, руб.</th></tr>',
+    '<table id="resultTable"><tr><th>Год</th><th>Ежегодный кэш-флоу,&nbsp;₽</th><th>Суммарный кэш-флоу,&nbsp;₽</th><th>Вложения,&nbsp;₽</th><th>Обслуживание,&nbsp;₽</th><th>Операционные расходы,&nbsp;₽</th><th>Экономия ФОТ,&nbsp;₽</th><th>Экономия от увеличения производительности,&nbsp;₽</th></tr>',
   ];
   for (let item of tableArr) {
     //prettier-ignore
@@ -274,7 +274,7 @@ const onSubmit = function (event) {
     `<section class="result">${makeTable(result)}</section>`
   );
   const payback = createElementFromHTML(
-    `<section class="payback">${paybackFunc(result)}</section>`
+    `<p class="payback">${paybackFunc(result)}</p>`
   );
 
   const resultTable = document.getElementById("resultTable");
@@ -284,11 +284,12 @@ const onSubmit = function (event) {
   if (resultPayback) resultPayback.remove();
   //document.body.appendChild(payback);
   //document.body.appendChild(tbl);
-  document.body.append(payback);
-  document.body.append(tbl);
+  const container = document.body.querySelector(".container");
+  container.append(payback);
+  container.append(tbl);
   const resultDiv = document.querySelector(".result");
   const info = document.querySelector(".information");
-  document.body.append(info);
+  container.append(info);
   info.style.display = "block";
   info.scrollIntoView();
 };
@@ -297,7 +298,7 @@ form.addEventListener("submit", onSubmit, true);
 
 ////////// ОКУПАЕМОСТЬ
 let plural = (years, months) => {
-  let text = "Срок окупаемости: ";
+  let text = "Срок окупаемости&nbsp;– ";
   casesY = ["год", "года", "года", "года", "лет"];
   let indexY =
     years % 100 > 4 && years % 100 <= 20
@@ -316,7 +317,7 @@ let plural = (years, months) => {
       : 4;
   text += months !== 0 ? `${months}&nbsp;${casesM[indexM]}` : "";
 
-  return `<p id='paybackText'>${text}</p>`;
+  return text;
 };
 
 let paybackFunc = (table) => {
@@ -377,5 +378,5 @@ function setBubble(scale, bubble) {
 const infobtn = document.querySelector(".information--btn");
 const infotxt = document.querySelector(".information--text");
 function openInfo() {
-  infotxt.style.display = infotxt.style.display === "none" ? "block" : "none";
+  infotxt.classList.toggle("is-visible");
 }
