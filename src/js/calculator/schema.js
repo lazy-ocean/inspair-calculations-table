@@ -1,6 +1,6 @@
 export default {
   ProjectPrice: {
-    label: "Стоимость проекта, ₽",
+    label: "Стоимость проекта,&nbsp₽",
     placeholder: 0,
     type: "range",
     required: true,
@@ -11,7 +11,7 @@ export default {
     step: 1000,
   },
   FiredEmployees: {
-    label: "Количество высвобождаемых работников, чел",
+    label: "Количество высвобождаемых работников,&nbspчел",
     placeholder: 0,
     type: "range",
     min: 1,
@@ -31,7 +31,7 @@ export default {
     value: 1,
   },
   Performance: {
-    label: "Ожидаемый прирост производительности, %",
+    label: "Ожидаемый прирост производительности,&nbsp%",
     placeholder: 0,
     type: "range",
     required: true,
@@ -41,7 +41,7 @@ export default {
     value: 0,
   },
   Shifts: {
-    label: "Количество смен в сутки (по 8 часов), шт.",
+    label: "Количество смен в сутки (по 8 часов),&nbspшт.",
     placeholder: 0,
     type: "range",
     required: true,
@@ -51,7 +51,7 @@ export default {
     value: 2,
   },
   WorkingDays: {
-    label: "Количество рабочих дней в неделю, шт.",
+    label: "Количество рабочих дней в неделю,&nbspшт.",
     placeholder: 0,
     type: "range",
     required: true,
@@ -61,7 +61,7 @@ export default {
     value: 7,
   },
   CostsPerPerson: {
-    label: "Затраты на человека на линии в год (с учетом налогов), ₽/год",
+    label: "Затраты на человека на линии в год (с учетом налогов),&nbsp₽/год",
     placeholder: 0,
     type: "range",
     required: true,
@@ -73,7 +73,7 @@ export default {
   },
   Savings: {
     label:
-      "Дополнительная экономия (защитные костюмы, аттестации и пр.), ₽/год",
+      "Дополнительная экономия (защитные костюмы, аттестации и пр.),&nbsp₽/год",
     placeholder: 0,
     type: "range",
     required: true,
