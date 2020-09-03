@@ -78,10 +78,10 @@ export default () => {
       `<p class="payback">${calculatePayback(result)}</p>`
     );
 
-    const resultTable = document.getElementById("resultTable");
+    const resultTable = document.querySelector(".result");
     if (resultTable) resultTable.remove();
 
-    const resultPayback = document.getElementById("paybackText");
+    const resultPayback = document.querySelector(".payback");
     if (resultPayback) resultPayback.remove();
     //document.body.appendChild(payback);
     //document.body.appendChild(tbl);
@@ -91,7 +91,7 @@ export default () => {
     const resultDiv = document.querySelector(".result");
     const info = document.querySelector(".information");
     container.append(info);
-    info.style.display = "block";
+    info.classList.add("is-visible");
     info.scrollIntoView();
   };
 
