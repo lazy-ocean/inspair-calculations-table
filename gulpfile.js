@@ -26,11 +26,11 @@ gulp.task("css", function () {
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(postcss([autoprefixer()]))
-    .pipe(gulp.dest("build/css"))
+    .pipe(gulp.dest("docs/css"))
     .pipe(csso())
     .pipe(rename("main.min.css"))
     .pipe(sourcemaps.write("."))
-    .pipe(gulp.dest("build/css"))
+    .pipe(gulp.dest("docs/css"))
     .pipe(server.stream());
 });
 
@@ -38,12 +38,12 @@ gulp.task("sass", function () {
   return gulp
     .src("src/sass/main.scss")
     .pipe(sass())
-    .pipe(gulp.dest("build/css"));
+    .pipe(gulp.dest("docs/css"));
 });
 
 gulp.task("server", function () {
   server.init({
-    server: "build/",
+    server: "docs/",
     notify: false,
     open: true,
     cors: true,
@@ -66,11 +66,11 @@ gulp.task("html", function () {
     .pipe(posthtml([include()]))
     .pipe(
       inlinesource({
-        rootpath: "build/",
+        rootpath: "docs/",
       })
     )
     .pipe(htmlmin({ collapseWhitespace: true }))
-    .pipe(gulp.dest("build"));
+    .pipe(gulp.dest("docs"));
 });
 
 gulp.task("js", () =>
@@ -86,11 +86,11 @@ gulp.task("js", () =>
     .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(uglify())
     .pipe(sourcemaps.write("./"))
-    .pipe(gulp.dest("build"))
+    .pipe(gulp.dest("docs"))
 );
 
 gulp.task("clean", function () {
-  return del("build");
+  return del("docs");
 });
 
 gulp.task("build", gulp.series("clean", "js", "css", "html"));
