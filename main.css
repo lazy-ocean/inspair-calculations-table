@@ -25,9 +25,6 @@ body {
   padding: 0 35px;
 }
 
-.form {
-}
-
 .form--item {
   margin-top: 40px;
   margin-bottom: 40px;
@@ -238,7 +235,7 @@ td {
   padding: 15px;
   border-bottom: 1px solid #a4a4a4;
   border-left: none;
-  max-width: 200px;
+  max-width: 210px;
 }
 
 th {
