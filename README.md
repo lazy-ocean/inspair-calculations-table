@@ -1,1 +1,1 @@
-"# inspair-calculations-table" 
+# inspair-calculations-table

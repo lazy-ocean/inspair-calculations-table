@@ -1,6 +1,4 @@
-const CLASSNAMES = {
-  inputs: "form-field",
-};
+import { CLASSNAMES } from "./constants";
 
 const schema = {
   ProjectPrice: {
@@ -299,7 +297,7 @@ form.addEventListener("submit", onSubmit, true);
 ////////// ОКУПАЕМОСТЬ
 let plural = (years, months) => {
   let text = "Срок окупаемости&nbsp;– ";
-  casesY = ["год", "года", "года", "года", "лет"];
+  const casesY = ["год", "года", "года", "года", "лет"];
   let indexY =
     years % 100 > 4 && years % 100 <= 20
       ? 4
@@ -308,7 +306,7 @@ let plural = (years, months) => {
       : 4;
   text += years !== 0 ? `${years}&nbsp;${casesY[indexY]} ` : "";
 
-  casesM = ["месяц", "месяца", "месяца", "месяца", "месяцев"];
+  const casesM = ["месяц", "месяца", "месяца", "месяца", "месяцев"];
   let indexM =
     months % 100 > 4 && months % 100 <= 20
       ? 4
@@ -377,6 +375,6 @@ function setBubble(scale, bubble) {
 /// ИНФОРМАЦИЯ
 const infobtn = document.querySelector(".information--btn");
 const infotxt = document.querySelector(".information--text");
-function openInfo() {
+infobtn.addEventListener("click", () => {
   infotxt.classList.toggle("is-visible");
-}
+});

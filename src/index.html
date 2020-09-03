@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./main.css" />
+    <link rel="stylesheet" href="css/main.min.css" inline />
   </head>
   <body>
     <div class="container">
@@ -12,11 +12,7 @@
         <button type="submit" form="form" class="submit-btn">Отправить</button>
       </div>
       <div class="information">
-        <!--<input type="checkbox" id="information--check" />
-      <label for="information--check" class="information--label"
-        >Параметры, используемые в вычислении:</label
-      >-->
-        <a class="information--btn" onclick="openInfo()" href="#info--text">
+        <a class="information--btn" href="#info--text">
           Параметры, используемые в&nbsp;вычислении:
         </a>
         <ul id="info--text" class="information--text">
@@ -30,6 +26,6 @@
       </div>
     </div>
 
-    <script src="./main.js"></script>
+    <script src="js/bundle.js" inline></script>
   </body>
 </html>
