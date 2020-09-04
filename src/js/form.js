@@ -75,7 +75,6 @@ export default () => {
     const result = calculate(values);
 
     const paybackData = calculatePayback(result);
-    console.log(paybackData);
     const payback = createElementFromHTML(
       `<p class="payback">${
         paybackData
@@ -86,7 +85,9 @@ export default () => {
     const tbl = createElementFromHTML(
       `<section class="result">${makeTable(
         result,
-        paybackData?.paybackYears
+        paybackData
+          ? paybackData.paybackYears - (paybackData.paybackMonths === 0 ? 1 : 0)
+          : null
       )}</section>`
     );
 

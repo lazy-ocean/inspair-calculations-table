@@ -114,5 +114,6 @@ export function calculatePayback(table) {
     paybackYears += 1;
   }
   //return plural(paybackYears, paybackMonths);
+  console.log(paybackYears, paybackMonths);
   return { paybackYears, paybackMonths };
 }
