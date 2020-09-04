@@ -21,7 +21,7 @@ export default {
     value: 4,
   },
   Robots: {
-    label: "Количество роботов в проекте",
+    label: "Количество роботов в&nbsp;проекте",
     placeholder: 0,
     type: "range",
     min: 1,
@@ -41,7 +41,7 @@ export default {
     value: 0,
   },
   Shifts: {
-    label: "Количество смен в сутки (по 8 часов)",
+    label: "Количество смен в&nbsp;сутки (по&nbsp;8&nbsp;часов)",
     placeholder: 0,
     type: "range",
     required: true,
@@ -51,7 +51,7 @@ export default {
     value: 2,
   },
   WorkingDays: {
-    label: "Количество рабочих дней в неделю",
+    label: "Количество рабочих дней в&nbsp;неделю",
     placeholder: 0,
     type: "range",
     required: true,
@@ -73,7 +73,7 @@ export default {
   },
   Savings: {
     label:
-      "Дополнительная экономия (защитные костюмы, аттестации и пр.),&nbsp₽/год",
+      "Дополнительная экономия (защитные костюмы, аттестации и&nbsp;пр.),&nbsp;₽/год",
     placeholder: 0,
     type: "range",
     required: true,

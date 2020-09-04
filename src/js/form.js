@@ -79,7 +79,7 @@ export default () => {
       `<p class="payback">${
         paybackData
           ? plural(paybackData.paybackYears, paybackData.paybackMonths)
-          : "Проект не окупается"
+          : "Проект будет окупаться больше 20&nbspлет. Попробуйте ввести другие значения"
       }</p>`
     );
     const tbl = createElementFromHTML(
