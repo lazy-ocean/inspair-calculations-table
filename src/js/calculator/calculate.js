@@ -88,7 +88,7 @@ export function calculatePayback(table) {
   let paybackMonths = 0;
   // Кол-во лет до окупаемости
   const payback = table.find((row) => row.cashflow > 0) || null;
-  if (payback === null) return "Проект не окупается";
+  if (payback === null) return null;
   // Предполагаем, что окупается за N лет + m месяцев, поэтому отнимаем от первого положительного года 1, чтобы посчитать месяцы
   paybackYears = payback.year - 1;
   // Кол-во месяцев до окупаемости:
@@ -113,5 +113,6 @@ export function calculatePayback(table) {
     paybackMonths = 0;
     paybackYears += 1;
   }
-  return plural(paybackYears, paybackMonths);
+  //return plural(paybackYears, paybackMonths);
+  return { paybackYears, paybackMonths };
 }

@@ -233,6 +233,14 @@ th:first-of-type {
   left: 0;
 }
 
+.isHighlighted td {
+  background-color: #ffb70086;
+}
+
+.isHighlighted:hover {
+  background-color: #ffb700a6;
+}
+
 th + td {
   min-width: 400px;
 }

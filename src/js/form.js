@@ -1,6 +1,7 @@
 import { CLASSNAMES } from "./constants";
 import calculator from "./calculator";
 import makeTable from "./table";
+import { plural } from "./utils";
 
 const { schema, validate, calculate, calculatePayback } = calculator;
 
@@ -70,12 +71,23 @@ export default () => {
       console.log(errors);
       return;
     }
+
     const result = calculate(values);
-    const tbl = createElementFromHTML(
-      `<section class="result">${makeTable(result)}</section>`
-    );
+
+    const paybackData = calculatePayback(result);
+    console.log(paybackData);
     const payback = createElementFromHTML(
-      `<p class="payback">${calculatePayback(result)}</p>`
+      `<p class="payback">${
+        paybackData
+          ? plural(paybackData.paybackYears, paybackData.paybackMonths)
+          : "Проект не окупается"
+      }</p>`
+    );
+    const tbl = createElementFromHTML(
+      `<section class="result">${makeTable(
+        result,
+        paybackData?.paybackYears
+      )}</section>`
     );
 
     const resultTable = document.querySelector(".result");

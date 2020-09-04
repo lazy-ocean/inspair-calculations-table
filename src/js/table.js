@@ -1,8 +1,8 @@
-export default (tableArr) => {
+export default (tableArr, paybackYears) => {
   let table = [
     '<table id="resultTable"><tr><th>Год</th><th>Ежегодный кэш-флоу,&nbsp;₽</th><th>Суммарный кэш-флоу,&nbsp;₽</th><th>Вложения,&nbsp;₽</th><th>Обслуживание,&nbsp;₽</th><th>Операционные расходы,&nbsp;₽</th><th>Экономия ФОТ,&nbsp;₽</th><th>Экономия от увеличения производительности,&nbsp;₽</th></tr>',
   ];
-  for (let item of tableArr) {
+  /*for (let item of tableArr) {
     //prettier-ignore
     const { year, investments, maintenance, operational, salarySaved, performanceSaved, cashflowYear, cashflow } = item;
     //prettier-ignore
@@ -10,6 +10,33 @@ export default (tableArr) => {
       .map((column) => `<td>${column.toLocaleString("ru")}</td>`)
       .join("");
     table.push(`<tr>${str}</tr>`);
+  }*/
+  for (let i = 0; i < tableArr.length; i++) {
+    const {
+      year,
+      investments,
+      maintenance,
+      operational,
+      salarySaved,
+      performanceSaved,
+      cashflowYear,
+      cashflow,
+    } = tableArr[i];
+    let str = [
+      year,
+      cashflowYear,
+      cashflow,
+      investments,
+      maintenance,
+      operational,
+      salarySaved,
+      performanceSaved,
+    ]
+      .map((column) => `<td>${column.toLocaleString("ru")}</td>`)
+      .join("");
+    table.push(
+      `<tr class=${i === paybackYears ? "isHighlighted" : ""}>${str}</tr>`
+    );
   }
   table.push("</table>");
   let HTMLtable = table.join("");
