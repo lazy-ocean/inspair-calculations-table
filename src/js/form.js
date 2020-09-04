@@ -20,14 +20,14 @@ export default () => {
       }, "") + `class="${CLASSNAMES.inputs}" name="${item}"`;
     let name = value["label"];
     let label = createElementFromHTML(
-      `<label class="form--label" for="${item}">${name}</label>`
+      `<label class="form__label" for="${item}">${name}</label>`
     );
     let element = createElementFromHTML(`<input ${attrs} /><br />`);
     let output = createElementFromHTML(
-      `<output class="bubble bubble--${item}"></output>`
+      `<output class="form__bubble form__bubble--${item}"></output>`
     );
     let scale = createElementFromHTML(
-      `<div class="form--minmax"><span>${value.min.toLocaleString(
+      `<div class="form__minmax"><span>${value.min.toLocaleString(
         "ru"
       )}</span><span>${value.max.toLocaleString("ru")}</span></div>`
     );
@@ -37,18 +37,18 @@ export default () => {
   nodes.forEach((node) => {
     form.append(
       createElementFromHTML(
-        `<div class= 'form--item form--item-${node.item}'></div>`
+        `<div class= 'form__item form__item--${node.item}'></div>`
       )
     );
-    const item = document.querySelector(`.form--item-${node.item}`);
+    const item = document.querySelector(`.form__item--${node.item}`);
     item.append(node.label);
 
     item.append(
       createElementFromHTML(
-        `<div class= 'form--scale form--scale-${node.item}'></div>`
+        `<div class= 'form__scale form__scale--${node.item}'></div>`
       )
     );
-    const formScale = document.querySelector(`.form--scale-${node.item}`);
+    const formScale = document.querySelector(`.form__scale--${node.item}`);
     formScale.append(node.element);
     formScale.append(node.output);
     formScale.append(node.scale);
@@ -83,8 +83,6 @@ export default () => {
 
     const resultPayback = document.querySelector(".payback");
     if (resultPayback) resultPayback.remove();
-    //document.body.appendChild(payback);
-    //document.body.appendChild(tbl);
     const container = document.body.querySelector(".container");
     container.append(payback);
     container.append(tbl);
@@ -98,10 +96,10 @@ export default () => {
   form.addEventListener("submit", onSubmit, true);
 
   ////// BUBBLES FOR THE FORM
-  const allScales = document.querySelectorAll(".form--item");
+  const allScales = document.querySelectorAll(".form__item");
   allScales.forEach((item) => {
-    const scale = item.querySelector(".form-field");
-    const bubble = item.querySelector(".bubble");
+    const scale = item.querySelector(".form__field");
+    const bubble = item.querySelector(".form__bubble");
 
     scale.addEventListener("input", () => {
       setBubble(scale, bubble);

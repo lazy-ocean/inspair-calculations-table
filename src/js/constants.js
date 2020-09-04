@@ -1,3 +1,3 @@
 export const CLASSNAMES = {
-  inputs: "form-field",
+  inputs: "form__field",
 };
