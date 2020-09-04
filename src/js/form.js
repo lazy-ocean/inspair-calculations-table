@@ -90,7 +90,7 @@ export default () => {
     const info = document.querySelector(".information");
     container.append(info);
     info.classList.add("is-visible");
-    info.scrollIntoView();
+    payback.scrollIntoView();
   };
 
   form.addEventListener("submit", onSubmit, true);
