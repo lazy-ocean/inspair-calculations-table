@@ -11,7 +11,7 @@ export default {
     step: 1000,
   },
   FiredEmployees: {
-    label: "Количество высвобождаемых работников,&nbspчел",
+    label: "Количество высвобождаемых работников",
     placeholder: 0,
     type: "range",
     min: 1,
@@ -41,7 +41,7 @@ export default {
     value: 0,
   },
   Shifts: {
-    label: "Количество смен в сутки (по 8 часов),&nbspшт.",
+    label: "Количество смен в сутки (по 8 часов)",
     placeholder: 0,
     type: "range",
     required: true,
@@ -51,7 +51,7 @@ export default {
     value: 2,
   },
   WorkingDays: {
-    label: "Количество рабочих дней в неделю,&nbspшт.",
+    label: "Количество рабочих дней в неделю",
     placeholder: 0,
     type: "range",
     required: true,

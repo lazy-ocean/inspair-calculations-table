@@ -19,7 +19,6 @@ body {
 }
 /* ФОРМА */
 .form__container {
-  max-width: 1024px;
   margin: 0 auto;
   margin-bottom: 60px;
   padding: 0 35px;
@@ -114,7 +113,7 @@ body {
 .information__btn:active,
 .information__btn:visited {
   padding: 5px 0px;
-  border-bottom: 4px dashed #ffb800;
+  border-bottom: 1px dashed #ffb800;
   font-weight: 700;
   line-height: 200%;
   cursor: pointer;
@@ -123,19 +122,25 @@ body {
 }
 
 .information__text {
-  padding: 10px;
+  padding: 0px;
+  margin: 10px 0;
   list-style: none;
   position: relative;
-  display: none;
-  transition: max-height 1s ease-out;
+  //display: none;
+  //visibility: hidden;
+  transition: max-height 0.3s ease-out;
+  max-height: 0;
+  overflow: hidden;
 }
 .information__text.is-visible {
-  display: block;
+  //display: block;
+  //visibility: visible;
+  max-height: 300px;
 }
 
 .information__text > li {
   padding: 5px;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .information__text > li:before {
