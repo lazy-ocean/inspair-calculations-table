@@ -1,0 +1,89 @@
+.form__container {
+  margin: 0 auto;
+  margin-bottom: 60px;
+  padding: 0 35px;
+
+  @media only screen and (max-width: 750px) {
+    width: 100%;
+  }
+}
+
+.form__item {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+
+  @media only screen and (max-width: 900px) {
+    display: block;
+  }
+}
+
+.form__label {
+  padding-top: 5px;
+  max-width: 35%;
+  display: block;
+
+  @media only screen and (max-width: 900px) {
+    max-width: 100%;
+  }
+}
+
+.form__scale {
+  position: relative;
+  width: 60%;
+
+  @media only screen and (max-width: 900px) {
+    width: 100%;
+  }
+}
+
+.form__field {
+  display: block;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  appearance: none;
+  background-color: $color-primary-yellow;
+  height: 3px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #383838;
+    border: $color-primary-yellow 2px solid;
+    cursor: pointer;
+  }
+}
+
+.form__minmax {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form__bubble {
+  background: $color-primary-yellow;
+  color: black;
+  padding: 4px 12px;
+  position: absolute;
+  border-radius: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 15px;
+    background: $color-primary-yellow;
+    left: 50%;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    transform: translate(-50%, -112%);
+  }
+}

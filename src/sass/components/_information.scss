@@ -1,0 +1,45 @@
+.information {
+  display: none;
+  margin-bottom: 50px;
+}
+
+.information.is-visible {
+  display: block;
+}
+
+.information__btn,
+.information__btn:active,
+.information__btn:visited {
+  padding: 5px 0px;
+  border-bottom: 1px dashed $color-primary-yellow;
+  font-weight: 700;
+  line-height: 200%;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+}
+
+.information__text {
+  padding: 0px;
+  margin: 10px 0;
+  list-style: none;
+  position: relative;
+  transition: max-height 0.3s ease-out;
+  max-height: 0;
+  overflow: hidden;
+
+  & > li {
+    padding: 5px;
+    margin-left: 20px;
+
+    &:before {
+      content: "—";
+      position: absolute;
+      left: 0;
+    }
+  }
+}
+
+.information__text.is-visible {
+  max-height: 300px;
+}

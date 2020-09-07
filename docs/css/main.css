@@ -18,12 +18,26 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 30px; }
+  @media only screen and (max-width: 750px) {
+    .container {
+      padding: 0 15px; } }
 
-/* ФОРМА */
+/* ОКУПАЕМОСТЬ */
+.payback {
+  font-size: 36px;
+  margin-top: 15px;
+  margin-bottom: 30px; }
+  @media only screen and (max-width: 750px) {
+    .payback {
+      font-size: 24px; } }
+
 .form__container {
   margin: 0 auto;
   margin-bottom: 60px;
   padding: 0 35px; }
+  @media only screen and (max-width: 750px) {
+    .form__container {
+      width: 100%; } }
 
 .form__item {
   margin-top: 40px;
@@ -34,15 +48,24 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between; }
+  @media only screen and (max-width: 900px) {
+    .form__item {
+      display: block; } }
 
 .form__label {
   padding-top: 5px;
   max-width: 35%;
   display: block; }
+  @media only screen and (max-width: 900px) {
+    .form__label {
+      max-width: 100%; } }
 
 .form__scale {
   position: relative;
   width: 60%; }
+  @media only screen and (max-width: 900px) {
+    .form__scale {
+      width: 100%; } }
 
 .form__field {
   display: block;
@@ -54,19 +77,17 @@ body {
           appearance: none;
   background-color: #ffb800;
   height: 3px; }
-
-.form__field:focus {
-  outline: none; }
-
-.form__field::-webkit-slider-thumb {
-  -webkit-appearance: none;
-          appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #383838;
-  border: #ffb800 2px solid;
-  cursor: pointer; }
+  .form__field:focus {
+    outline: none; }
+  .form__field::-webkit-slider-thumb {
+    -webkit-appearance: none;
+            appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #383838;
+    border: #ffb800 2px solid;
+    cursor: pointer; }
 
 .form__minmax {
   display: -webkit-box;
@@ -76,7 +97,6 @@ body {
       -ms-flex-pack: justify;
           justify-content: space-between; }
 
-/* BUBBLE FOR THE FORM INPUTS */
 .form__bubble {
   background: #ffb800;
   color: black;
@@ -86,26 +106,18 @@ body {
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%); }
+  .form__bubble::before {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 15px;
+    background: #ffb800;
+    left: 50%;
+    -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    -webkit-transform: translate(-50%, -112%);
+            transform: translate(-50%, -112%); }
 
-.form__bubble::before {
-  content: "";
-  position: absolute;
-  width: 30px;
-  height: 15px;
-  background: #ffb800;
-  left: 50%;
-  -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-          clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  -webkit-transform: translate(-50%, -112%);
-          transform: translate(-50%, -112%); }
-
-/* ОКУПАЕМОСТЬ */
-.payback {
-  font-size: 36px;
-  margin-top: 15px;
-  margin-bottom: 30px; }
-
-/* ИНФО ПРО РОБОТОВ */
 .information {
   display: none;
   margin-bottom: 50px; }
@@ -133,48 +145,19 @@ body {
   transition: max-height 0.3s ease-out;
   max-height: 0;
   overflow: hidden; }
+  .information__text > li {
+    padding: 5px;
+    margin-left: 20px; }
+    .information__text > li:before {
+      content: "—";
+      position: absolute;
+      left: 0; }
 
 .information__text.is-visible {
   max-height: 300px; }
 
-.information__text > li {
-  padding: 5px;
-  margin-left: 20px; }
-
-.information__text > li:before {
-  content: "—";
-  position: absolute;
-  left: 0; }
-
-/* BUTTON */
-.submit__btn {
-  display: block;
-  width: 50%;
-  padding: 15px;
-  margin: 20px auto;
-  border: none;
-  background-color: #ffb800;
-  font-family: Montserrat, Arial, sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  cursor: pointer;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s; }
-
-.submit__btn:focus {
-  outline: none; }
-
-.submit__btn:hover {
-  background-color: #f3c424; }
-
-.submit__btn:active {
-  -webkit-transform: translateY(3px);
-          transform: translateY(3px); }
-
 /* TABLE SECTION */
 .result {
-  /*background-color: #ffb800;
-  color: #000000;*/
   background-color: #555559;
   color: #ffffff;
   display: block;
@@ -185,6 +168,15 @@ body {
   -webkit-box-shadow: 5px 10px 30px 0px rgba(46, 46, 46, 0.35);
           box-shadow: 5px 10px 30px 0px rgba(46, 46, 46, 0.35);
   -webkit-overflow-scrolling: auto; }
+  .result::-webkit-scrollbar {
+    width: 10px; }
+  .result::-webkit-scrollbar-track {
+    background-color: rgba(223, 223, 223, 0.267); }
+  .result::-webkit-scrollbar-thumb {
+    background-color: #ffb800; }
+  @media only screen and (max-width: 900px) {
+    .result {
+      width: 100%; } }
 
 #resultTable {
   width: 100%;
@@ -210,6 +202,10 @@ th {
   position: sticky;
   top: 0;
   z-index: 2; }
+  th:first-of-type {
+    z-index: 3;
+    position: sticky;
+    left: 0; }
 
 tr:hover {
   background-color: #747474; }
@@ -222,43 +218,29 @@ td:first-child {
   left: 0;
   z-index: 1; }
 
-th:first-of-type {
-  z-index: 3;
-  position: sticky;
-  left: 0; }
-
 .isHighlighted td {
   background-color: #c58e01; }
-
-.isHighlighted:hover {
-  background-color: #e0a101; }
 
 th + td {
   min-width: 400px; }
 
-.result::-webkit-scrollbar {
-  width: 10px; }
-
-.result::-webkit-scrollbar-track {
-  background-color: rgba(223, 223, 223, 0.267); }
-
-.result::-webkit-scrollbar-thumb {
-  background-color: #ffb800; }
-
-@media only screen and (max-width: 900px) {
-  .form__item {
-    display: block; }
-  .form__scale {
-    width: 100%; }
-  .form__label {
-    max-width: 100%; }
-  .result {
-    width: 100%; } }
-
-@media only screen and (max-width: 750px) {
-  .container {
-    padding: 0 15px; }
-  .form__container {
-    width: 100%; }
-  .payback {
-    font-size: 24px; } }
+.submit__btn {
+  display: block;
+  width: 50%;
+  padding: 15px;
+  margin: 20px auto;
+  border: none;
+  background-color: #ffb800;
+  font-family: Montserrat, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s; }
+  .submit__btn:focus {
+    outline: none; }
+  .submit__btn:hover {
+    background-color: #f3c424; }
+  .submit__btn:active {
+    -webkit-transform: translateY(3px);
+            transform: translateY(3px); }
