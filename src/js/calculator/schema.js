@@ -8,7 +8,7 @@ export default {
     max: 50000000,
     // TEST
     value: 8400000,
-    step: 1000,
+    step: 100000,
   },
   FiredEmployees: {
     label: "Количество высвобождаемых работников",
@@ -41,12 +41,12 @@ export default {
     value: 0,
   },
   Shifts: {
-    label: "Количество смен в&nbsp;сутки (по&nbsp;8&nbsp;часов)",
+    label: "Количество смен в&nbsp;сутки (по&nbsp;12&nbsp;часов)",
     placeholder: 0,
     type: "range",
     required: true,
     min: 0,
-    max: 3,
+    max: 4,
     // TEST
     value: 2,
   },
@@ -78,7 +78,7 @@ export default {
     type: "range",
     required: true,
     min: 10000,
-    max: 100000,
+    max: 1000000,
     // TEST
     value: 10000,
     step: 1000,

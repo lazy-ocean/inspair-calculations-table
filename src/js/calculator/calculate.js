@@ -29,7 +29,7 @@ export function calculate(values) {
     // Стоимость электроэнергии
     const ELECTRICITYCOSTS = 4.5;
     // Кол-во рабочих часов в смену
-    const WORKHOURS = 8;
+    const WORKHOURS = 12;
     // Кол-во недель в году
     const WORKWEEKS = 50;
     const yearIndex = 1 + (year - 1) * INFLATION;
