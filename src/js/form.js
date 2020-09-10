@@ -1,7 +1,7 @@
 import { CLASSNAMES } from "./constants";
 import calculator from "./calculator";
 import makeTable from "./table";
-import { plural } from "./utils";
+import { formatChunkTimestamp } from "./utils";
 
 const { schema, validate, calculate, calculatePayback } = calculator;
 
@@ -78,7 +78,10 @@ export default () => {
     const payback = createElementFromHTML(
       `<p class="payback">${
         paybackData
-          ? plural(paybackData.paybackYears, paybackData.paybackMonths)
+          ? `Срок окупаемости&nbsp;– ${formatChunkTimestamp(
+              paybackData.paybackYears,
+              "years"
+            )} ${formatChunkTimestamp(paybackData.paybackMonths, "months")}`
           : "Проект будет окупаться больше 20&nbspлет. Попробуйте ввести другие значения"
       }</p>`
     );
