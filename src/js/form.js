@@ -11,7 +11,7 @@ export default () => {
     div.innerHTML = htmlString.trim();
     return div.firstChild;
   }
-  ////////////////////////////// СОЗДАНИЕ ФОРМЫ
+  ////////////////////////////// FORM GENERATING
   const form = document.querySelector(".form");
   const nodes = Object.keys(schema).map((item) => {
     const { initialValue, ...value } = schema[item];
@@ -78,11 +78,11 @@ export default () => {
     const payback = createElementFromHTML(
       `<p class="payback">${
         paybackData
-          ? `Срок окупаемости&nbsp;– ${formatChunkTimestamp(
+          ? `Payback period&nbsp;– ${formatChunkTimestamp(
               paybackData.paybackYears,
               "years"
             )} ${formatChunkTimestamp(paybackData.paybackMonths, "months")}`
-          : "Проект будет окупаться больше 20&nbspлет. Попробуйте ввести другие значения"
+          : "Payback period is more than 20&nbsp;years. Please try other parameters"
       }</p>`
     );
     const tbl = createElementFromHTML(

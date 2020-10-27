@@ -1,6 +1,6 @@
 export default (tableArr, highlightedRow) => {
   let table = [
-    '<table id="resultTable"><tr><th>Год</th><th>Ежегодный кэш-флоу,&nbsp;₽</th><th>Суммарный кэш-флоу,&nbsp;₽</th><th>Вложения,&nbsp;₽</th><th>Обслуживание,&nbsp;₽</th><th>Операционные расходы,&nbsp;₽</th><th>Экономия ФОТ,&nbsp;₽</th><th>Экономия от увеличения производительности,&nbsp;₽</th></tr>',
+    '<table id="resultTable"><tr><th>Year</th><th>Annual cash flow,&nbsp;₽</th><th>Total cash flow,&nbsp;₽</th><th>Investments,&nbsp;₽</th><th>Maintenance,&nbsp;₽</th><th>Operational costs,&nbsp;₽</th><th>Salary savings,&nbsp;₽</th><th>Performance savings,&nbsp;₽</th></tr>',
   ];
   for (let i = 0; i < tableArr.length; i++) {
     const {

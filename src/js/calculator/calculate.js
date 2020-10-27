@@ -20,28 +20,18 @@ export function calculate(values) {
   const tableArr = [];
   const maxYears = 20;
   for (let year = 1; year <= maxYears; year++) {
-    // Расход энергии роботом
     const ENEGRYCONS = 5;
-    // Процент загрузки робота
     const CARRYINGCAPACITY = 0.9;
-    // Инфляция
     const INFLATION = 0.05;
-    // Стоимость электроэнергии
     const ELECTRICITYCOSTS = 4.5;
-    // Кол-во рабочих часов в смену
     const WORKHOURS = 12;
-    // Кол-во недель в году
     const WORKWEEKS = 50;
     const yearIndex = 1 + (year - 1) * INFLATION;
     let row = {};
     row.year = year;
-    /////// maintenance - Стоимость обслуживания, ₽ [2]
     year % 5 === 0 ? (row.maintenance = 360000) : (row.maintenance = 120000);
     //prettier-ignore
-    /////// operational - Стоимость операционных расходов,₽ [3]
     row.operational = ENEGRYCONS * Robots * CARRYINGCAPACITY * yearIndex * Shifts * WorkingDays * ELECTRICITYCOSTS * WORKHOURS * WORKWEEKS;
-    /////// salary saved - Экономия ФОТ, ₽ [4]
-    /////// investments - Стоимость вложений, ₽ [1]
     if (year === 1) {
       row.salarySaved =
         FiredEmployees * CostsPerPerson * yearIndex -
@@ -53,13 +43,9 @@ export function calculate(values) {
         FiredEmployees * CostsPerPerson * yearIndex -
         CostsPerPerson * (FiredEmployees / 5) * yearIndex;
     }
-    /////// performanceSaved - Экономия за счет увеличения производительности, ₽ [5]
     row.performanceSaved = row.salarySaved * (Performance / 100);
-    /////// otherSaved - Прочая экономия, ₽ [6]
     row.otherSaved = Savings;
 
-    /////// cashflowYear - Ежегодный кэш-флоу, ₽ [7]
-    /////// cashflow - Суммарный кэш-флоу, ₽ [8]
     if (year === 1) {
       row.cashflowYear =
         row.salarySaved +
@@ -84,14 +70,14 @@ export function calculate(values) {
 }
 
 export function calculatePayback(table) {
-  // Кол-во лет до окупаемости
+  // Years till positive payback - ROI
   const payback = table.find((row) => row.cashflow > 0) || null;
   if (payback === null) return null;
 
-  // Предполагаем, что окупается за N лет + m месяцев, поэтому отнимаем от первого положительного года 1, чтобы посчитать месяцы
+  // Assuming that project is paying off in N years so minus one from the first positive payback year to calculate months
   let paybackYears = payback.year - 1;
 
-  // Кол-во месяцев до окупаемости:
+  // months till positive payback
   const paybackRow = table[Math.max(paybackYears - 1, 0)];
   const {
     salarySaved,
@@ -107,13 +93,11 @@ export function calculatePayback(table) {
   let cashflow = paybackYears > 0 ? paybackRow.cashflow : -investments;
   let delta = (savings - spendings) / 12;
   let paybackMonths = Math.ceil(-cashflow / delta);
-  //console.log(cashflow, delta);
 
   if (paybackMonths >= 12) {
     paybackMonths -= 12;
     paybackYears += 1;
   }
 
-  //console.log(paybackYears, paybackMonths);
   return { paybackYears, paybackMonths };
 }
