@@ -44,7 +44,7 @@ To edit input parameters, simply modify data in `schema.js`:
 
 \* Mind that in that version `required` is used as validation as all fields are necessary and all values are preset
   
-Form bubbles are generated in `form.js`, too, and are specified as HTML `<output>`, each for every input. It calculates its value based on a `setBubble()`  (`form.js`).
+Form bubbles are generated in `form.js`, too, and are specified as HTML `<output>`, each for every input. It calculates its value based on a `form.js > setBubble()`.
 
 2. **Table**
 
@@ -54,17 +54,17 @@ Table headers are specified as a premade string, other values are ordered accord
 
 3. **Result text**
 
-In this case, the calculations and table were made to find **payback period**: it shows as a result right after the form submitting and table data are just the more detailed parameters for each year.
-  * Detailed info on calculations see below
+In this case, the calculations and table were made to find **payback period**: it shows as a result right after the form submitting. Table data is just the detailed parameters for each year.
+  * Detailed info on calculations find below
   
   * HTML string is generated in `form.js onSubmit()` function: there you can modify output text. 
 
-> Mind the `formatChunkTimestamp` function of `utils.js`: it helps maintaining plural suffix (*one year/two year**s***) and has advanced version for the more 'volatile' plural suffix forms (as in Russian, Polish and so on).
+> Mind the `utils.js formatChunkTimestamp()` function: it helps maintain plural suffix (*one year/two year**s***) and has advanced version for the more 'volatile' plural suffix forms (as in Russian, Polish and so on).
 
 ### Calculations
 All calculations are made in `calculator/calculate.js`.
 1. **`calculate()` function**
-This is where the main table calculations are made: it is called in `/form.js > onSubmit()` function and uses form inputs. 
+This is where the main table calculations are made: it uses form inputs and is called in `/form.js > onSubmit()` function.  
 Modificate `intValues` according to your form inputs and all further calculations, the result used for the table generation (`table.js`) should look like an array of objects with data by rows, where keys are column headers/values:
 ```
 [
@@ -75,12 +75,12 @@ Modificate `intValues` according to your form inputs and all further calculation
 ]
 ```
 2. **`calculatePayback()` function**
-This is where the payback period for the **result text** is calculated. It results in `{ years, months }` object, so modify this function to whatever data it should calculate for the result string.
+This is where the payback period for the **result text** is calculated. It returns a `{ years, months }` object, so modify this function to whatever data it should calculate for the result string.
 
 ### Validation
-You can validate user inputs using `validate.js`. For this particular case with input sliders and preset default valid values the data doesn't need additional validation. But if you want to omit the case of invalid data submitting or use other input types (text), modify `validate.js` accordingly. The result of validation is used in `form.js onSubmit()` function. 
+You can validate user inputs using `validate.js`. For this particular case with input sliders and preset default valid values the data doesn't need an additional validation. But if you want to omit the case of invalid data submitting or use other input types (text), modify `validate.js` accordingly. The result of validation is used in `form.js onSubmit()` function. 
 
 ### Styles and design
-Styles and design made with compliance with [product owner](https://inspair.ru/) main styles.
+Styles and design made in compliance with [product owner](https://inspair.ru/) main styles.
 
 Basics (colors and font) could be modified using `_variables.scss`. For anything else see `sass/components` folder.
