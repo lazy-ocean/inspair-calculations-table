@@ -17,6 +17,7 @@ You'll need on your computer:
 - Gulp
 - npm
 ### To do
+- Clone this repository: `git clone https://github.com/lazy-ocean/inspair-calculations-table/`
 - Setup: `npm i`
 - Start a local server: `npm run start`
 
@@ -29,23 +30,19 @@ All working files are in `src` working directory.
 ### Components
 1. **Form**
 
-Made with HTML `<input type="range">` and is generated in `form.js` with data took from `schema.js`.
+Made with HTML `<input type="range">` and is generated in `form.js` with data took from `calculator/schema.js`.
 To edit input parameters, simply modify data in `schema.js`:
-  * `label` will be used in the form as HTML form label
-    
-  * `type` - preferred HTML `<input type="*">`
-    
-  * `placeholder` - if you need one in form input field
-    
-  * `required` - mark mandatory and optional parameters
-    
-    > Mind that in that version `required` is used as validation as all fields are necessary and all values are preset
-    
-  * `min` and `max` - border-values of the input slider
-  
-  * `value` - preset value
-  
-  * `step` - size of each change/movement of the input slider.
+| Item key | Item value |
+| ---: | :--- |
+| `label` | used in the form as HTML form label |
+| `type` | preferred HTML `<input type="*">` |
+| `placeholder` | optional, if you need one in form input field |
+| `required`* | mark mandatory and optional parameters |
+| `min` and `max` | border-values of the input slider |
+| `value` | default and showing value |
+| `step` | size of each change/movement of the input slider |
+
+\* Mind that in that version `required` is used as validation as all fields are necessary and all values are preset
   
 Form bubbles are generated in `form.js`, too, and are specified as HTML `<output>`, each for every input. It calculates its value based on a `setBubble()`  (`form.js`).
 
@@ -58,14 +55,27 @@ Table headers are specified as a premade string, other values are ordered accord
 3. **Result text**
 
 In this case, the calculations and table were made to find **payback period**: it shows as a result right after the form submitting and table data are just the more detailed parameters for each year.
-  * Calculations are made in `calculate.js`
+  * Detailed info on calculations see below
   
   * HTML string is generated in `form.js onSubmit()` function: there you can modify output text. 
 
 > Mind the `formatChunkTimestamp` function of `utils.js`: it helps maintaining plural suffix (*one year/two year**s***) and has advanced version for the more 'volatile' plural suffix forms (as in Russian, Polish and so on).
 
 ### Calculations
-Detailed info will be added shortly.
+All calculations are made in `calculator/calculate.js`.
+1. **`calculate()` function**
+This is where the main table calculations are made: it is called in `/form.js > onSubmit()` function and uses form inputs. 
+Modificate `intValues` according to your form inputs and all further calculations, the result used for the table generation (`table.js`) should look like an array of objects with data by rows, where keys are column headers/values:
+```
+[
+0: {year: 1, maintenance: 120000, operational: 170100, salarySaved: 1795200, investments: 8400000, …}
+1: {year: 2, maintenance: 120000, operational: 178605.00000000003, investments: 0, salarySaved: 1884960, …}
+2: {year: 3, maintenance: 120000, operational: 187110, investments: 0, salarySaved: 1974720, …}
+...
+]
+```
+2. **`calculatePayback()` function**
+This is where the payback period for the **result text** is calculated. It results in `{ years, months }` object, so modify this function to whatever data it should calculate for the result string.
 
 ### Validation
 You can validate user inputs using `validate.js`. For this particular case with input sliders and preset default valid values the data doesn't need additional validation. But if you want to omit the case of invalid data submitting or use other input types (text), modify `validate.js` accordingly. The result of validation is used in `form.js onSubmit()` function. 
